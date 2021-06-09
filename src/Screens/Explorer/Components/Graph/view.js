@@ -6,7 +6,7 @@ export default function View({ gdata }) {
   const data = useMemo(() => {
     return gdata;
   }, []);
-
+  const NODE_R = 8;
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [hoverNode, setHoverNode] = useState(null);
@@ -47,38 +47,35 @@ export default function View({ gdata }) {
     }
   };
   const paintRing = useCallback(
-    (node, ctx) => {
-      // add ring just for highlighted nodes
-      //console.log("ring", node);
+    ({ id, x, y, val }, ctx) => {
+      if (highlightNodes.has(id)) {
+        ctx.fillStyle = id === hoverNode ? "red" : "orange";
+        ctx.beginPath();
+        ctx.arc(x, y, 2 + 15 * val, 0, 2 * Math.PI, false);
+        ctx.fill();
+      }
+      ctx.fillStyle = "#58A4B0";
       ctx.beginPath();
-      ctx.arc(node.x, node.y, node.val * 4.5, 0, 2 * Math.PI, false);
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = node.id === hoverNode ? "red" : "orange";
-      //ctx.strokeStyle = "#FF0000";
-      ctx.stroke();
+      ctx.arc(x, y, 1 + 15 * val, 0, 2 * Math.PI, false);
+      ctx.fill(); // 0-15
     },
     [hoverNode]
   );
-
+  function nodePaint({ id, x, y, val }, color, ctx) {
+    [
+      () => {
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI, false);
+        ctx.fill();
+      },
+    ][0]();
+  }
   return (
     <ForceGraph2D
       ref={fgRef}
       graphData={data}
-      // nodeVal={(node) => node.val}
       autoPauseRedraw={false}
       linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
-      // nodeCanvasObject={(node) => "red"}
-      // nodeCanvasObject={(node) => {
-      //const  isMainNode =
-      //  if (hoverNode == node.id) {
-      //  return "red";
-      //} else {
-      // return highlightNodes.has(node.id) ? "blue" : "black";
-      // }
-      //}}
-      nodeCanvasObjectMode={(node) =>
-        highlightNodes.has(node.id) ? "before" : undefined
-      }
       nodeCanvasObject={paintRing}
       linkDirectionalParticles={4}
       linkDirectionalParticleWidth={(link) =>

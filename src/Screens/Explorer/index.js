@@ -5,21 +5,21 @@ const gdata = {
     {
       id: "id1",
       name: "name1",
-      val: 1,
+      val: 0.1,
     },
     {
       id: "id2",
       name: "name2",
-      val: 1,
+      val: 0,
     },
     {
       id: "id3",
-      name: "name2",
-      val: 1,
+      name: "name3",
+      val: 0.5,
     },
     {
       id: "id4",
-      name: "name2",
+      name: "name4",
       val: 1,
     },
   ],
