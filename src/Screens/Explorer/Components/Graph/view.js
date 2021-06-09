@@ -25,7 +25,7 @@ export default function View({ gdata }) {
     highlightNodes.clear();
     highlightLinks.clear();
     if (node) {
-      // highlightNodes.add(node.id);
+      highlightNodes.add(node.id);
 
       data.links
         .filter((e) => e.source.id == node.id || e.target.id == node.id)
@@ -42,27 +42,44 @@ export default function View({ gdata }) {
             highlightNodes.add(neighbor.id);
           }
         });
+      setHoverNode(node.id);
+      updateHighlight();
     }
-
-    setHoverNode(node.id || null);
-    updateHighlight();
   };
+  const paintRing = useCallback(
+    (node, ctx) => {
+      // add ring just for highlighted nodes
+      //console.log("ring", node);
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.val * 4.5, 0, 2 * Math.PI, false);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = node.id === hoverNode ? "red" : "orange";
+      //ctx.strokeStyle = "#FF0000";
+      ctx.stroke();
+    },
+    [hoverNode]
+  );
 
   return (
     <ForceGraph2D
       ref={fgRef}
       graphData={data}
-      // nodeRelSize={NODE_R}
+      // nodeVal={(node) => node.val}
       autoPauseRedraw={false}
       linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
-      nodeColor={(node) => {
-        //const  isMainNode =
-        if (hoverNode == node.id) {
-          return "red";
-        } else {
-          return highlightNodes.has(node.id) ? "blue" : "black";
-        }
-      }}
+      // nodeCanvasObject={(node) => "red"}
+      // nodeCanvasObject={(node) => {
+      //const  isMainNode =
+      //  if (hoverNode == node.id) {
+      //  return "red";
+      //} else {
+      // return highlightNodes.has(node.id) ? "blue" : "black";
+      // }
+      //}}
+      nodeCanvasObjectMode={(node) =>
+        highlightNodes.has(node.id) ? "before" : undefined
+      }
+      nodeCanvasObject={paintRing}
       linkDirectionalParticles={4}
       linkDirectionalParticleWidth={(link) =>
         highlightLinks.has(link) ? 4 : 0
