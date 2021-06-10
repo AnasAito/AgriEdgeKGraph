@@ -13,6 +13,7 @@ export const NODE_GET_MANY = gql`
       description
       type
       score
+      created_at
     }
   }
 `;
@@ -24,6 +25,8 @@ export const NODE_GET_ONE = gql`
       label
       description
       type
+      score
+      created_at
     }
   }
 `;
