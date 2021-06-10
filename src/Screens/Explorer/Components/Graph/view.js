@@ -48,30 +48,25 @@ export default function View({ gdata }) {
   };
   const paintRing = useCallback(
     ({ id, x, y, val }, ctx) => {
+      // ring
       if (highlightNodes.has(id)) {
-        ctx.fillStyle = id === hoverNode ? "red" : "orange";
+        ctx.fillStyle = id === hoverNode ? "#0075A2" : "#28AFB0";
         ctx.beginPath();
         ctx.arc(x, y, 2 + 15 * val, 0, 2 * Math.PI, false);
         ctx.fill();
       }
-      ctx.fillStyle = "#58A4B0";
+      // main node
+      ctx.fillStyle = "#C8AB83";
       ctx.beginPath();
       ctx.arc(x, y, 1 + 15 * val, 0, 2 * Math.PI, false);
       ctx.fill(); // 0-15
     },
     [hoverNode]
   );
-  function nodePaint({ id, x, y, val }, color, ctx) {
-    [
-      () => {
-        ctx.beginPath();
-        ctx.arc(x, y, 5, 0, 2 * Math.PI, false);
-        ctx.fill();
-      },
-    ][0]();
-  }
+
   return (
     <ForceGraph2D
+      backgroundColor={"#76F7BF"}
       ref={fgRef}
       graphData={data}
       autoPauseRedraw={false}
