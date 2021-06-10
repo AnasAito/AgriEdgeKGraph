@@ -1,11 +1,9 @@
 import React, { useMemo, useRef, useState, useCallback } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 
-export default function View({ gdata }) {
+export default function View({ data }) {
   const fgRef = useRef();
-  const data = useMemo(() => {
-    return gdata;
-  }, []);
+
   const NODE_R = 8;
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
@@ -47,23 +45,23 @@ export default function View({ gdata }) {
     }
   };
   const paintRing = useCallback(
-    ({ id, x, y, val }, ctx) => {
+    ({ id, x, y, score }, ctx) => {
       // ring
       if (highlightNodes.has(id)) {
         ctx.fillStyle = id === hoverNode ? "#0075A2" : "#28AFB0";
         ctx.beginPath();
-        ctx.arc(x, y, 2 + 15 * val, 0, 2 * Math.PI, false);
+        ctx.arc(x, y, 2 + 15 * score, 0, 2 * Math.PI, false);
         ctx.fill();
       }
       // main node
       ctx.fillStyle = "#C8AB83";
       ctx.beginPath();
-      ctx.arc(x, y, 1 + 15 * val, 0, 2 * Math.PI, false);
+      ctx.arc(x, y, 1 + 15 * score, 0, 2 * Math.PI, false);
       ctx.fill(); // 0-15
     },
     [hoverNode]
   );
-
+  console.log(data);
   return (
     <ForceGraph2D
       backgroundColor={"#76F7BF"}
