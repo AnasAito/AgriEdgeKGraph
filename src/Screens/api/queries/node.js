@@ -18,6 +18,7 @@ export const NODE_GET_MANY = gql`
           label
         }
       }
+      link
       created_at
     }
   }
@@ -36,6 +37,7 @@ export const NODE_GET_ONE = gql`
           label
         }
       }
+      link
       created_at
     }
   }

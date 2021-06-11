@@ -57,12 +57,19 @@ export default function View({ node }) {
           </div>
           {/*actions */}
           <div className="flex ">
-            <button
-              type="button"
-              className="flex-1 bg-indigo-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Visit
-            </button>
+            {node.link ? (
+              <button
+                type="button"
+                href={node.link}
+                onClick={() => window.open(node.link, "_blank")}
+                className="flex-1 bg-indigo-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Visit
+              </button>
+            ) : (
+              <></>
+            )}
+
             <button
               type="button"
               className="flex-1 ml-3 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

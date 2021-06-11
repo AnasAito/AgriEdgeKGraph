@@ -30,6 +30,7 @@ export default function Index() {
           type: n.type,
           createdAt: n.created_at,
           tags: n.node_tags.map((node_tag) => node_tag.tag.label),
+          link: n.link,
         };
       });
       let edge_list = get(edges, "edge", []).map((e) => {
