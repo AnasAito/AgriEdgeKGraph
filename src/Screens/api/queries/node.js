@@ -13,6 +13,11 @@ export const NODE_GET_MANY = gql`
       description
       type
       score
+      node_tags {
+        tag {
+          label
+        }
+      }
       created_at
     }
   }
@@ -26,6 +31,11 @@ export const NODE_GET_ONE = gql`
       description
       type
       score
+      node_tags {
+        tag {
+          label
+        }
+      }
       created_at
     }
   }

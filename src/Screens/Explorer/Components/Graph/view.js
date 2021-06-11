@@ -24,7 +24,7 @@ export default function View({ data, setNode }) {
     // first zoom at node
 
     fgRef.current.centerAt(node.x, node.y, 1000);
-    fgRef.current.zoom(8, 1000);
+    fgRef.current.zoom(5, 1000);
     // highlight nodes
     highlightNodes.clear();
     highlightLinks.clear();
@@ -76,32 +76,24 @@ export default function View({ data, setNode }) {
         has = true;
       }
     });
-    //console.log("haslink", has);
+
     return has;
   };
   return (
     <ForceGraph2D
       backgroundColor={type_to_color["bg"]}
       ref={fgRef}
-      // width={(2 * size.width) / 3}
-      //height={size.height / 3}
       graphData={data}
       autoPauseRedraw={false}
       linkWidth={(link) => {
-        // const formatedLink = { source: link.source.id, target: link.target.id };
-
         return hasLink(highlightLinks, link) ? 5 : 1;
       }}
       nodeCanvasObject={paintRing}
       linkDirectionalParticles={4}
       linkDirectionalParticleWidth={(link) => {
-        //const formatedLink = { source: link.source.id, target: link.target.id };
-
         return hasLink(highlightLinks, link) ? 4 : 0;
       }}
-      // nodeCanvasObject={paintRing}
       onNodeClick={handleNodeClick}
-      // onLinkHover={handleLinkHover}
     />
   );
 }

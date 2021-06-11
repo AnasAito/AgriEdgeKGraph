@@ -29,6 +29,7 @@ export default function Index() {
           description: n.description,
           type: n.type,
           createdAt: n.created_at,
+          tags: n.node_tags.map((node_tag) => node_tag.tag.label),
         };
       });
       let edge_list = get(edges, "edge", []).map((e) => {
