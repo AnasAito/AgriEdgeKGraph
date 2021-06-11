@@ -35,7 +35,8 @@ export default function View({ data, setNode }) {
       data.links
         .filter((e) => e.source.id == node.id || e.target.id == node.id)
         .forEach((e) => {
-          highlightLinks.add(e);
+          highlightLinks.add({ source: e.source.id, target: e.target.id });
+
           if (e.source.id == node.id) {
             const nodeId = e.target.id;
             const neighbor = data.nodes.filter((node) => node.id == nodeId)[0];
@@ -68,7 +69,16 @@ export default function View({ data, setNode }) {
     },
     [hoverNode]
   );
-
+  const hasLink = (linkList, link) => {
+    let has = false;
+    linkList.forEach((e) => {
+      if (e.source == link.source.id && e.target == link.target.id) {
+        has = true;
+      }
+    });
+    //console.log("haslink", has);
+    return has;
+  };
   return (
     <ForceGraph2D
       backgroundColor={type_to_color["bg"]}
@@ -77,12 +87,18 @@ export default function View({ data, setNode }) {
       //height={size.height / 3}
       graphData={data}
       autoPauseRedraw={false}
-      linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
+      linkWidth={(link) => {
+        // const formatedLink = { source: link.source.id, target: link.target.id };
+
+        return hasLink(highlightLinks, link) ? 5 : 1;
+      }}
       nodeCanvasObject={paintRing}
       linkDirectionalParticles={4}
-      linkDirectionalParticleWidth={(link) =>
-        highlightLinks.has(link) ? 4 : 0
-      }
+      linkDirectionalParticleWidth={(link) => {
+        //const formatedLink = { source: link.source.id, target: link.target.id };
+
+        return hasLink(highlightLinks, link) ? 4 : 0;
+      }}
       // nodeCanvasObject={paintRing}
       onNodeClick={handleNodeClick}
       // onLinkHover={handleLinkHover}
