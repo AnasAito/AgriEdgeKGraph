@@ -117,10 +117,10 @@ export default function view() {
             <p class="mt-5 text-black  font-black text-xl text-center ">
               Or add new nodes
             </p>
-            <div class=" mt-4 flex items-center justify-center">
+            <div class=" mt-4  mb-10 flex items-center justify-center">
               {" "}
-              <div class="  flex   self-center h-96 w-96  items-center justify-center bg-green-200 hover:shadow-md border-gray-100 border-dashed border-2 rounded-md">
-                <p class=" text-6xl   ">+</p>
+              <div class="  flex cursor-pointer transform  ease-in-out duration-200 hover:scale-105   self-center  h-72 w-72  items-center justify-center bg-green-200 hover:shadow-md border-gray-100 border-dashed border-2 rounded-md">
+                <p class=" text-6xl    ">+</p>
               </div>
             </div>
           </div>

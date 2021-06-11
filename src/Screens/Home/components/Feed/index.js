@@ -1,5 +1,7 @@
 import React from "react";
 import View from "./view";
-export default function index() {
-  return <View />;
+import { get } from "lodash";
+
+export default function index({ feedNodes }) {
+  return <View feedNodes={feedNodes} />;
 }

@@ -139,7 +139,7 @@ const announcements = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-export default function view() {
+export default function view({ feedNodes }) {
   return (
     <div className="grid grid-cols-1 gap-4">
       {/* Announcements */}
@@ -154,28 +154,52 @@ export default function view() {
             </h2>
             <div className="flow-root mt-6">
               <ul className="-my-5 divide-y divide-gray-200">
-                {announcements.map((announcement) => (
-                  <li key={announcement.id} className="py-5">
-                    <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
-                      <h3 className="text-sm font-semibold text-gray-800">
-                        <a
-                          href={announcement.href}
-                          className="hover:underline focus:outline-none"
-                        >
-                          {/* Extend touch target to entire panel */}
-                          <span
-                            className="absolute inset-0"
-                            aria-hidden="true"
-                          />
-                          {announcement.title}
-                        </a>
-                      </h3>
-                      <p className="mt-1 text-sm text-gray-600 line-clamp-2">
-                        {announcement.preview}
-                      </p>
-                    </div>
-                  </li>
-                ))}
+                {feedNodes.length != 0 ? (
+                  feedNodes.map((node) => (
+                    <li key={node.id} className="py-5">
+                      <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
+                        <h3 className="text-sm font-semibold text-gray-800">
+                          <a
+                            // href={node.href}
+                            className="hover:underline focus:outline-none"
+                          >
+                            {/* Extend touch target to entire panel */}
+                            <span
+                              className="absolute inset-0"
+                              aria-hidden="true"
+                            />
+                            {node.label}
+                          </a>
+                        </h3>
+                        <p className="mt-1 text-sm text-gray-600 line-clamp-2">
+                          {node.description}
+                        </p>
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <>
+                    {[1, 2, 3].map((s) => (
+                      <li key={s} className="py-5">
+                        <div className=" focus-within:ring-2 focus-within:ring-cyan-500">
+                          <h3 className="text-sm font-semibold text-gray-800">
+                            <a
+                              // href={node.href}
+                              className="hover:underline focus:outline-none"
+                            >
+                              {/* Extend touch target to entire panel */}
+                              <span
+                                className=" flex  animate-pulse h-3 w-1/2 bg-gray-300 rounded-sm inset-0"
+                                aria-hidden="true"
+                              />
+                            </a>
+                          </h3>
+                          <p className=" mt-2  h-20 text-sm animate-pulse bg-gray-200 rounded-sm text-gray-600 line-clamp-2"></p>
+                        </div>
+                      </li>
+                    ))}
+                  </>
+                )}
               </ul>
             </div>
             <div className="mt-6">
