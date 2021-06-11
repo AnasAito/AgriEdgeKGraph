@@ -1,5 +1,5 @@
 import React from "react";
 import View from "./view";
-export default function Index() {
+export default function index() {
   return <View />;
 }
