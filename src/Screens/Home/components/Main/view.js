@@ -72,10 +72,7 @@ const actions = [
   },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-export default function View({ create, setCreate }) {
+export default function View({ create, setCreate, refQuery }) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:col-span-2">
       {/* Welcome panel */}
@@ -83,7 +80,7 @@ export default function View({ create, setCreate }) {
         <div className="rounded-lg bg-white overflow-hidden shadow  ">
           <div className=" p-6">
             {create ? (
-              <Create />
+              <Create setCreate={setCreate} refQuery={refQuery} />
             ) : (
               <>
                 {" "}

@@ -16,11 +16,12 @@ import {
 import {
   PencilIcon,
   PlusIcon as PlusIconSolid,
+  HomeIcon as HomeIconSolid,
   SearchIcon,
   ViewGridIcon as ViewGridIconSolid,
   ViewListIcon,
 } from "@heroicons/react/solid";
-
+import { Link } from "react-router-dom";
 const navigation = [
   { name: "Home", href: "#", icon: HomeIcon, current: false },
   { name: "All Files", href: "#", icon: ViewGridIconOutline, current: false },
@@ -173,13 +174,13 @@ export default function View() {
               )}
             </Menu>
 
-            <button
-              type="button"
+            <Link
+              to="/home"
               className="flex bg-indigo-600 p-1 rounded-full items-center justify-center text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              <PlusIconOutline className="h-6 w-6" aria-hidden="true" />
+              <HomeIconSolid className="h-6 w-6" aria-hidden="true" />
               <span className="sr-only">Add file</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

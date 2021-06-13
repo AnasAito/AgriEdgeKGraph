@@ -10,9 +10,10 @@ export default function Index() {
       variables: { limit: 5, order_by: { created_at: "desc" } },
     }
   );
+
   const feedNodes = get(nodes, "node", []).map((n) => {
     return { id: n.id, label: n.label, description: n.description };
   });
   console.log(feedNodes);
-  return <View feedNodes={feedNodes} />;
+  return <View feedNodes={feedNodes} refQuery={Queries["node.get.many"]} />;
 }
