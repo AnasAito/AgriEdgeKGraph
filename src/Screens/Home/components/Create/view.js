@@ -1,47 +1,33 @@
 import React from "react";
 import { Fragment, useState } from "react";
-import { Disclosure, Menu, RadioGroup, Transition } from "@headlessui/react";
-import { HomeIcon, PlusIcon, SearchIcon } from "@heroicons/react/solid";
 
-import { Formik, Field, Form } from "formik";
-const team = [
-  {
-    name: "mnist clean",
-    email: "code",
-    imageUrl:
-      "https://images.unsplash.com/photo-1513910367299-bce8d8a0ebf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "mnist dataset",
-    email: "dataset",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "mnist cnn vanilla notebook",
-    email: "code",
-    imageUrl:
-      "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
+import Menu from "../Menu";
 
-export default function View({ setCreate, setSearch, nodesSearch }) {
+export default function View({
+  setCreate,
+  setSearch,
+  nodesSearch,
+  onSubmit,
+  types,
+}) {
   const onCancel = () => setCreate(false);
-  const onSubmit = () => {
+  const submit = () => {
     const node = {
       label: name,
       link: link,
       description: description,
       refs: refs.map((node) => node.id),
       tags: tags,
+      type: type,
     };
-    console.log(node);
+    onSubmit(node);
   };
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
   const [refs, setRefs] = useState([]);
   const [tags, setTags] = useState([]);
+  const [type, setType] = useState("dataset");
   return (
     <div>
       {" "}
@@ -57,7 +43,7 @@ export default function View({ setCreate, setSearch, nodesSearch }) {
             </p>
           </div>
 
-          <div>
+          <div class="">
             <label
               htmlFor="project_name"
               className="block text-sm font-medium text-gray-700"
@@ -75,6 +61,7 @@ export default function View({ setCreate, setSearch, nodesSearch }) {
               />
             </div>
           </div>
+          <Menu type={type} setType={setType} types={types} />
           <div>
             <label
               htmlFor="node_link"
@@ -206,7 +193,7 @@ export default function View({ setCreate, setSearch, nodesSearch }) {
               placeholder="add tags separated by a comma"
               onChange={(e) => {
                 setTags(e.target.value.split(","));
-                console.log(tags);
+                // console.log(tags);
               }}
             />
           </div>
@@ -248,7 +235,7 @@ export default function View({ setCreate, setSearch, nodesSearch }) {
               Cancel
             </button>
             <button
-              onClick={onSubmit}
+              onClick={submit}
               type="button"
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >

@@ -15,5 +15,11 @@ export default function Index() {
     return { id: n.id, label: n.label, description: n.description };
   });
   console.log(feedNodes);
-  return <View feedNodes={feedNodes} refQuery={Queries["node.get.many"]} />;
+  return (
+    <View
+      feedNodes={feedNodes}
+      refQuery={Queries["node.get.many"]}
+      typesQuery={Queries["type.get.many"]}
+    />
+  );
 }

@@ -1,78 +1,9 @@
 import React, { Fragment } from "react";
-import { Menu, Popover, Transition } from "@headlessui/react";
 
-import {
-  AcademicCapIcon,
-  BadgeCheckIcon,
-  BellIcon,
-  CashIcon,
-  ClockIcon,
-  MenuIcon,
-  ReceiptRefundIcon,
-  UsersIcon,
-  XIcon,
-} from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 import Create from "../Create/index";
-const user = {
-  name: "Chelsea Hagon",
-  email: "chelseahagon@example.com",
-  role: "Human Resources Manager",
-  imageUrl:
-    "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 
-const stats = [
-  { label: "Vacation days left", value: 12 },
-  { label: "Sick days left", value: 4 },
-  { label: "Personal days left", value: 2 },
-];
-const actions = [
-  {
-    icon: ClockIcon,
-    name: "Request time off",
-    href: "#",
-    iconForeground: "text-teal-700",
-    iconBackground: "bg-teal-50",
-  },
-  {
-    icon: BadgeCheckIcon,
-    name: "Benefits",
-    href: "#",
-    iconForeground: "text-purple-700",
-    iconBackground: "bg-purple-50",
-  },
-  {
-    icon: UsersIcon,
-    name: "Schedule a one-on-one",
-    href: "#",
-    iconForeground: "text-light-blue-700",
-    iconBackground: "bg-light-blue-50",
-  },
-  {
-    icon: CashIcon,
-    name: "Payroll",
-    href: "#",
-    iconForeground: "text-yellow-700",
-    iconBackground: "bg-yellow-50",
-  },
-  {
-    icon: ReceiptRefundIcon,
-    name: "Submit an expense",
-    href: "#",
-    iconForeground: "text-rose-700",
-    iconBackground: "bg-rose-50",
-  },
-  {
-    icon: AcademicCapIcon,
-    name: "Training",
-    href: "#",
-    iconForeground: "text-indigo-700",
-    iconBackground: "bg-indigo-50",
-  },
-];
-
-export default function View({ create, setCreate, refQuery }) {
+export default function View({ create, setCreate, refQuery, typesQuery }) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:col-span-2">
       {/* Welcome panel */}
@@ -80,7 +11,11 @@ export default function View({ create, setCreate, refQuery }) {
         <div className="rounded-lg bg-white overflow-hidden shadow  ">
           <div className=" p-6">
             {create ? (
-              <Create setCreate={setCreate} refQuery={refQuery} />
+              <Create
+                setCreate={setCreate}
+                refQuery={refQuery}
+                typesQuery={typesQuery}
+              />
             ) : (
               <>
                 {" "}
