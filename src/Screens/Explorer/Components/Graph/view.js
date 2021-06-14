@@ -1,8 +1,16 @@
-import React, { useMemo, useRef, useState, useCallback } from "react";
+import React, {
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import useWindowSize from "./useWindowSize";
-export default function View({ data, setNode }) {
+export default function View({ data, setNode, selected }) {
   const fgRef = useRef();
+  console.log("selected", selected);
+  const graphData = useMemo(() => data, [data]);
   const RATIO = 30;
   const type_to_color = {
     paper: "#006d77",
@@ -53,7 +61,7 @@ export default function View({ data, setNode }) {
     }
   };
   const paintRing = useCallback(
-    ({ id, x, y, score, type }, ctx) => {
+    ({ id, x, y, score, type, isSelect }, ctx) => {
       // ring
       if (highlightNodes.has(id)) {
         ctx.fillStyle = id === hoverNode ? "#0075A2" : "#28AFB0";
@@ -65,9 +73,16 @@ export default function View({ data, setNode }) {
       ctx.fillStyle = type_to_color[type];
       ctx.beginPath();
       ctx.arc(x, y, 1 + RATIO * score, 0, 2 * Math.PI, false);
+
+      ctx.globalAlpha = 0.5;
+      // console.log(isSearch);
+      if (isSelect) {
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = "red";
+      }
       ctx.fill(); // 0-15
     },
-    [hoverNode]
+    [hoverNode, selected]
   );
   const hasLink = (linkList, link) => {
     let has = false;
@@ -79,11 +94,12 @@ export default function View({ data, setNode }) {
 
     return has;
   };
+
   return (
     <ForceGraph2D
       backgroundColor={type_to_color["bg"]}
       ref={fgRef}
-      graphData={data}
+      graphData={graphData}
       autoPauseRedraw={false}
       linkWidth={(link) => {
         return hasLink(highlightLinks, link) ? 5 : 1;

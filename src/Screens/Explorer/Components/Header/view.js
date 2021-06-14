@@ -22,6 +22,7 @@ import {
   ViewListIcon,
 } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import { getSuggestedQuery } from "@testing-library/react";
 const navigation = [
   { name: "Home", href: "#", icon: HomeIcon, current: false },
   { name: "All Files", href: "#", icon: ViewGridIconOutline, current: false },
@@ -81,8 +82,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function View() {
+export default function View({ setSearch }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setSearch(event.target.value);
+    }
+  };
   return (
     <header className="w-full">
       <div className="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
@@ -120,6 +126,8 @@ export default function View() {
                   className="hidden h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 sm:block"
                   placeholder="tap a tag , a project name or anything ..."
                   type="search"
+                  type="search"
+                  onKeyPress={handleKeyPress}
                 />
               </div>
             </form>
