@@ -38,7 +38,7 @@ export default function View({ node }) {
           </div>
           <div class="">
             <h3 className="font-medium text-gray-900">Description</h3>
-            <p class=" h-40  mt-3 bg-gray-100 rounded-md  cursor-pointer border-black  hover:bg-gray-200 p-2 overflow-ellipsis overflow-hidden ">
+            <p class="   mt-3 bg-gray-100 rounded-md  cursor-pointer border-black  hover:bg-gray-200 p-2 overflow-ellipsis overflow-hidden ">
               {node.description}
             </p>
           </div>
@@ -78,12 +78,12 @@ export default function View({ node }) {
               <></>
             )}
 
-            <button
+            {/*<button
               type="button"
               className="flex-1 ml-3 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Expand
-            </button>
+            </button>*/}
           </div>
         </div>
       )}

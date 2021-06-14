@@ -51,7 +51,7 @@ export default function View({
                 your new node.
               </p>
             </div>
-
+            <Menu type={type} setType={setType} types={types} />
             <div class="">
               <label
                 htmlFor="project_name"
@@ -70,13 +70,13 @@ export default function View({
                 />
               </div>
             </div>
-            <Menu type={type} setType={setType} types={types} />
+
             <div>
               <label
                 htmlFor="node_link"
                 className="block text-sm font-medium text-gray-700"
               >
-                Node link
+                Node url
               </label>
               <div className="mt-1">
                 <input

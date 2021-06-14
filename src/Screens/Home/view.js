@@ -42,7 +42,7 @@ import {
   UsersIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { SearchIcon } from "@heroicons/react/solid";
 
 const user = {
@@ -54,7 +54,7 @@ const user = {
 };
 
 const navigation = [
-  { name: "Home", href: "#", current: true },
+  { name: "Home", href: "/", current: true },
   { name: "Profile", href: "#", current: false },
   { name: "All Resources", href: "/explorer", current: false },
 
@@ -80,6 +80,7 @@ export default function Example({
   TagCreate,
   tagsQuery,
 }) {
+  const history = useHistory();
   return (
     <div className="min-h-screen bg-gray-100">
       <Popover
@@ -166,16 +167,19 @@ export default function Example({
                     <div className="hidden lg:block lg:col-span-2">
                       <nav className="flex space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <div
                             key={item.name}
                             className={classNames(
                               item.current ? "text-white" : "text-cyan-100",
                               "text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
                             )}
-                            aria-current={item.current ? "page" : undefined}
+                            onClick={() => {
+                              history.push(item.href);
+                              window.location.reload();
+                            }}
                           >
-                            <Link to={item.href}>{item.name}</Link>
-                          </a>
+                            {item.name}
+                          </div>
                         ))}
                       </nav>
                     </div>
