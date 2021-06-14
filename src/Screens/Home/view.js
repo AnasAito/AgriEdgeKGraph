@@ -70,7 +70,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example({ feedNodes, refQuery, typesQuery }) {
+export default function Example({
+  feedNodes,
+  refQuery,
+  typesQuery,
+  NodeCreate,
+  EdgeCreate,
+  NodeTagCreate,
+  TagCreate,
+  tagsQuery,
+}) {
   return (
     <div className="min-h-screen bg-gray-100">
       <Popover
@@ -296,7 +305,15 @@ export default function Example({ feedNodes, refQuery, typesQuery }) {
           {/* Main 3 column grid */}
           <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
             {/* Left column */}
-            <Main refQuery={refQuery} typesQuery={typesQuery} />
+            <Main
+              refQuery={refQuery}
+              typesQuery={typesQuery}
+              NodeCreate={NodeCreate}
+              EdgeCreate={EdgeCreate}
+              tagsQuery={tagsQuery}
+              TagCreate={TagCreate}
+              NodeTagCreate={NodeTagCreate}
+            />
 
             {/* Right column */}
             <Feed feedNodes={feedNodes} />

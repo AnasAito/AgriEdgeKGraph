@@ -3,6 +3,7 @@ import View from "./view";
 import { get } from "lodash";
 import { useQuery } from "@apollo/client";
 import Queries from "../api/queries/index";
+import Mutations from "../api/Mutations/index";
 export default function Index() {
   const { loading: loading_node, data: nodes } = useQuery(
     Queries["node.get.many"],
@@ -20,6 +21,11 @@ export default function Index() {
       feedNodes={feedNodes}
       refQuery={Queries["node.get.many"]}
       typesQuery={Queries["type.get.many"]}
+      NodeCreate={Mutations["node.create.one"]}
+      EdgeCreate={Mutations["edge.create.many"]}
+      tagsQuery={Queries["tag.get.many"]}
+      TagCreate={Mutations["tag.create.many"]}
+      NodeTagCreate={Mutations["node.tag.create.many"]}
     />
   );
 }

@@ -3,7 +3,17 @@ import React, { Fragment } from "react";
 import { SearchIcon } from "@heroicons/react/solid";
 import Create from "../Create/index";
 
-export default function View({ create, setCreate, refQuery, typesQuery }) {
+export default function View({
+  create,
+  setCreate,
+  refQuery,
+  typesQuery,
+  NodeCreate,
+  EdgeCreate,
+  tagsQuery,
+  TagCreate,
+  NodeTagCreate,
+}) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:col-span-2">
       {/* Welcome panel */}
@@ -15,6 +25,11 @@ export default function View({ create, setCreate, refQuery, typesQuery }) {
                 setCreate={setCreate}
                 refQuery={refQuery}
                 typesQuery={typesQuery}
+                NodeCreate={NodeCreate}
+                EdgeCreate={EdgeCreate}
+                tagsQuery={tagsQuery}
+                TagCreate={TagCreate}
+                NodeTagCreate={NodeTagCreate}
               />
             ) : (
               <>

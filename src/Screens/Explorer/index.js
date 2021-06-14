@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { get } from "lodash";
 import { useQuery } from "@apollo/client";
 import Queries from "../api/queries/index";
+
 import View from "./view";
 export default function Index() {
   // set selected node data
+
   const [node, setNode] = useState(null);
   // get graph data
   const { loading: loading_node, data: nodes } = useQuery(

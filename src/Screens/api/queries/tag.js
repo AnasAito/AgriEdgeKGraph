@@ -10,7 +10,7 @@ export const TAG_GET_MANY = gql`
     tag(where: $where, order_by: $order_by, limit: $limit, offset: $offset) {
       id
       label
-      created_at
+
       tag_nodes {
         node {
           id
@@ -25,7 +25,7 @@ export const TAG_GET_ONE = gql`
     node_by_pk(id: $id) {
       id
       label
-      created_at
+
       tag_nodes {
         node {
           id
