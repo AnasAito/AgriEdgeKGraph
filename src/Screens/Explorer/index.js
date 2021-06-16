@@ -3,16 +3,28 @@ import React, { useState, useMemo, useEffect } from "react";
 import { get } from "lodash";
 import { useQuery } from "@apollo/client";
 import Queries from "../api/queries/index";
-
+import { useLocation } from "react-router-dom";
 import View from "./view";
+
 export default function Index() {
   const getNodesFromTags = (data) => {
     const list_2d = get(data, "tag", []).map((tag) => tag.tag_nodes);
     console.log("from tags");
     return [].concat(...list_2d).map((tag) => tag.node.id);
   };
+
+  console.log("query,", useLocation().search.split("="));
+  let query = useLocation();
   // search query
   const [search, setSearch] = useState("");
+  useEffect(() => {
+    const search_ = query.search;
+    if (search_ != "") {
+      const q_ = search_.split("=");
+      const q = q_[q_.length - 1];
+      setSearch(q);
+    }
+  }, [query]);
   const { loading: loading_node_search, data: nodesSearch } = useQuery(
     Queries["node.get.many"],
     {
@@ -75,7 +87,7 @@ export default function Index() {
     () => prepare_gdata(loading_node, loading_edge, nodes, edges),
     [nodes, edges, selected]
   );
-  console.log(gdata["nodes"]);
+  console.log(search);
   return (
     <View
       gdata={gdata}

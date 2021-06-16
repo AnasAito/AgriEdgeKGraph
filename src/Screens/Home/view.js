@@ -1,49 +1,9 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  const colors = require('tailwindcss/colors')
-  
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        colors: {
-          'light-blue': colors.lightBlue,
-          teal: colors.teal,
-          cyan: colors.cyan,
-          rose: colors.rose,
-        }
-      }
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/line-clamp'),
-    ]
-  }
-  ```
-*/
 import { Fragment } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import Main from "./components/Main";
 import Feed from "./components/Feed";
-import {
-  AcademicCapIcon,
-  BadgeCheckIcon,
-  BellIcon,
-  CashIcon,
-  ClockIcon,
-  MenuIcon,
-  ReceiptRefundIcon,
-  UsersIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useHistory } from "react-router-dom";
-import { SearchIcon } from "@heroicons/react/solid";
 
 const user = {
   name: "Chelsea Hagon",

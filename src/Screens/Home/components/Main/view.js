@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import { SearchIcon } from "@heroicons/react/solid";
 import Create from "../Create/index";
-
+import { useHistory } from "react-router-dom";
 export default function View({
   create,
   setCreate,
@@ -14,6 +14,13 @@ export default function View({
   TagCreate,
   NodeTagCreate,
 }) {
+  const history = useHistory();
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      //  setSearch(event.target.value);
+      history.push(`/explorer?query=${event.target.value}`);
+    }
+  };
   return (
     <div className="grid grid-cols-1 gap-4 lg:col-span-2">
       {/* Welcome panel */}
@@ -63,6 +70,7 @@ export default function View({
                         placeholder="Search"
                         type="search"
                         name="search"
+                        onKeyPress={handleKeyPress}
                       />
                     </div>
                   </div>
