@@ -3,6 +3,7 @@ import View from "./view";
 import { useQuery, useMutation } from "@apollo/client";
 import { get } from "lodash";
 import { useHistory } from "react-router-dom";
+import schema from "./getAutoTags";
 export default function Index({
   setCreate,
   refQuery,
@@ -13,7 +14,6 @@ export default function Index({
   TagCreate,
   NodeTagCreate,
 }) {
-  const history = useHistory();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   // get types enum
@@ -124,6 +124,7 @@ export default function Index({
       types={types}
       onSubmit={onSubmit}
       loading={loading}
+      getAutoTags={schema["get.auto.tags"]}
     />
   );
 }

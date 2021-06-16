@@ -1,5 +1,5 @@
 import React from "react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 import Menu from "../Menu";
 import HashLoader from "react-spinners/ClipLoader";
@@ -10,6 +10,7 @@ export default function View({
   onSubmit,
   types,
   loading,
+  getAutoTags,
 }) {
   const onCancel = () => setCreate(false);
   const submit = () => {
@@ -28,7 +29,20 @@ export default function View({
   const [description, setDescription] = useState("");
   const [refs, setRefs] = useState([]);
   const [tags, setTags] = useState([]);
+  const [tagsM, setTagsM] = useState([]);
   const [type, setType] = useState("dataset");
+  const [loadingTags, setLoadingTags] = useState(false);
+
+  useEffect(() => {
+    async function getTags() {
+      console.log(loadingTags);
+      await getAutoTags(link, setTags, setLoadingTags);
+
+      //console.log("auto tags", newTags);
+    }
+
+    getTags();
+  }, [link]);
   return (
     <div>
       {" "}
@@ -201,38 +215,42 @@ export default function View({
                 className="mt-1 block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md"
                 placeholder="add tags separated by a comma"
                 onChange={(e) => {
-                  setTags(e.target.value.split(","));
+                  setTagsM(e.target.value.split(","));
                   // console.log(tags);
                 }}
               />
             </div>
             <div class="flex justify-center bg-gray-100 m-4 rounded-md p-4 space-x-2 flex-wrap  ">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className=" my-1 inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700"
-                >
-                  {tag}
-                  <button
-                    type="button"
-                    className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+              {loadingTags ? (
+                <HashLoader color="green" size={100} />
+              ) : (
+                tagsM.concat(tags).map((tag) => (
+                  <span
+                    key={tag}
+                    className=" my-1 inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700"
                   >
-                    <span className="sr-only">Remove large option</span>
-                    <svg
-                      className="h-2 w-2"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 8 8"
+                    {tag}
+                    <button
+                      type="button"
+                      className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeWidth="1.5"
-                        d="M1 1l6 6m0-6L1 7"
-                      />
-                    </svg>
-                  </button>
-                </span>
-              ))}
+                      <span className="sr-only">Remove large option</span>
+                      <svg
+                        className="h-2 w-2"
+                        stroke="currentColor"
+                        fill="none"
+                        viewBox="0 0 8 8"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeWidth="1.5"
+                          d="M1 1l6 6m0-6L1 7"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                ))
+              )}
             </div>
 
             <div className="flex justify-end">
