@@ -74,10 +74,10 @@ export default function View({ data, setNode, selected }) {
       ctx.beginPath();
       ctx.arc(x, y, 1 + RATIO * score, 0, 2 * Math.PI, false);
 
-      ctx.globalAlpha = 0.5;
+      //ctx.globalAlpha = 0.5;
       // console.log(isSearch);
       if (isSelect) {
-        ctx.globalAlpha = 1;
+        //ctx.globalAlpha = 1;
         ctx.fillStyle = "red";
       }
       ctx.fill(); // 0-15
