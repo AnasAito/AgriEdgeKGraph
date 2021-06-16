@@ -131,7 +131,7 @@ export default function Example({
                             key={item.name}
                             className={classNames(
                               item.current ? "text-white" : "text-cyan-100",
-                              "text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+                              "text-sm cursor-pointer font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
                             )}
                             onClick={() => {
                               history.push(item.href);

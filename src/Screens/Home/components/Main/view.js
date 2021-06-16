@@ -49,9 +49,13 @@ export default function View({
                     A better way to explore ressources
                   </p>
                   <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Lorem ipsum dolor sit amet consect adipisicing elit.
-                    Possimus magnam voluptatum cupiditate veritatis in accusamus
-                    quisquam.
+                    AgriGraph is a graph based search engine designed to ease
+                    internal ressources{" "}
+                    <span class="font-semibold text-black">accessibility</span>{" "}
+                    in a <span class="font-semibold text-black"> Smart</span>{" "}
+                    and{" "}
+                    <span class="font-semibold text-black"> Simplified </span>
+                    way .
                   </p>
                 </div>
                 <div className="px-12 mt-4 lg:px-0">
@@ -67,7 +71,7 @@ export default function View({
                       <input
                         id="search"
                         className="block w-full text-green-200 bg-green-200 bg-opa py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 focus:text-gray-900 placeholder-gary-200 focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
-                        placeholder="Search"
+                        placeholder="Tape anything (tag , paper name , project name ...)"
                         type="search"
                         name="search"
                         onKeyPress={handleKeyPress}
