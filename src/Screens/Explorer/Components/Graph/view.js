@@ -11,14 +11,24 @@ export default function View({ data, setNode, selected }) {
   const fgRef = useRef();
   console.log("selected", selected);
   const graphData = useMemo(() => data, [data]);
-  const RATIO = 30;
+  const RATIO = 50;
   const type_to_color = {
-    paper: "#006d77",
+    dataset: "#006d77",
+
     code: "#83c5be",
-    bg: "#edf6f9",
-    dataset: "#ffddd2",
+
+    paper: "#F3C677",
+
     project: "#e29578",
+
+    hardware: "#B7CE63",
+
+    document: "#ffddd2",
+
+    api: "#CB04A5",
+    bg: "#edf6f9",
   };
+
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
   const [hoverNode, setHoverNode] = useState(null);
