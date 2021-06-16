@@ -58,8 +58,8 @@ export default function Example({
                       className="h-8 "
                       src="https://agriad.um6p.ma/wp-content/uploads/2018/11/newlogoagriad.png"
                     />*/}
-                    <span className="text-blue-900 font-black text-3xl">
-                      AgriEdge
+                    <span className="text-white font-black text-3xl">
+                      AgriGraph
                     </span>
                   </a>
                 </div>

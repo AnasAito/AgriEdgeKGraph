@@ -13,6 +13,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
+import { useHistory } from "react-router-dom";
 
 const user = {
   name: "Chelsea Hagon",
@@ -139,7 +140,8 @@ const announcements = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-export default function view({ feedNodes }) {
+export default function View({ feedNodes }) {
+  const history = useHistory();
   return (
     <div className="grid grid-cols-1 gap-4">
       {/* Announcements */}
@@ -159,8 +161,11 @@ export default function view({ feedNodes }) {
                     <li key={node.id} className="py-5">
                       <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
                         <h3 className="text-sm font-semibold text-gray-800">
-                          <a
+                          <button
                             // href={node.href}
+                            onClick={() =>
+                              history.push(`/explorer?query=${node.label}`)
+                            }
                             className="hover:underline focus:outline-none"
                           >
                             {/* Extend touch target to entire panel */}
@@ -169,7 +174,7 @@ export default function view({ feedNodes }) {
                               aria-hidden="true"
                             />
                             {node.label}
-                          </a>
+                          </button>
                         </h3>
                         <p className="mt-1 text-sm text-gray-600 line-clamp-2">
                           {node.description}
