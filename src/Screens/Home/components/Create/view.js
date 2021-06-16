@@ -19,10 +19,14 @@ export default function View({
       link: link,
       description: description,
       refs: refs.map((node) => node.id),
-      tags: tags,
+      tags: tags
+        .concat(tagsM)
+        .map((tag) => tag.trim())
+        .filter((tag) => tag != ""),
       type: type,
     };
-    onSubmit(node);
+    // onSubmit(node);
+    console.log(node.tags);
   };
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
@@ -233,6 +237,16 @@ export default function View({
                     <button
                       type="button"
                       className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+                      onClick={() => {
+                        if (tags.includes(tag)) {
+                          setTags((tags) => tags.filter((tag_) => tag_ != tag));
+                        }
+                        if (tagsM.includes(tag)) {
+                          setTagsM((tags) =>
+                            tags.filter((tag_) => tag_ != tag)
+                          );
+                        }
+                      }}
                     >
                       <span className="sr-only">Remove large option</span>
                       <svg
