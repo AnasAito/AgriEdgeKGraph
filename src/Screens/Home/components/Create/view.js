@@ -25,8 +25,8 @@ export default function View({
         .filter((tag) => tag != ""),
       type: type,
     };
-    // onSubmit(node);
-    console.log(node.tags);
+    onSubmit(node);
+    //console.log(node.tags);
   };
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
