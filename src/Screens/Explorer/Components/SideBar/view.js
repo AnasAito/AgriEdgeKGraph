@@ -1,11 +1,21 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-
-export default function View({ node }) {
-  const [open, setOpen] = useState(true);
+import Modify from "./Modify";
+export default function View({
+  node,
+  refQuery,
+  typesQuery,
+  NodeCreate,
+  EdgeCreate,
+  tagsQuery,
+  TagCreate,
+  NodeTagCreate,
+  NodeNeighbors,
+}) {
+  const [isModify, setIsModify] = useState(false);
   console.log("from sidebar", node);
-  const tags = ["moisture", "processing", "soil", "moisture", "processing"];
+
   return (
     <>
       {node == null ? (
@@ -17,6 +27,20 @@ export default function View({ node }) {
             </svg>
             <div className=" text-xl font-black  ">No node was selected</div>
           </div>
+        </div>
+      ) : isModify ? (
+        <div className="  w-full  flex flex-col justify-between ">
+          <Modify
+            NodeNeighbors={NodeNeighbors}
+            node={node}
+            refQuery={refQuery}
+            typesQuery={typesQuery}
+            NodeCreate={NodeCreate}
+            EdgeCreate={EdgeCreate}
+            tagsQuery={tagsQuery}
+            TagCreate={TagCreate}
+            NodeTagCreate={NodeTagCreate}
+          />
         </div>
       ) : (
         <div className="  w-full  flex flex-col justify-between ">
@@ -81,6 +105,7 @@ export default function View({ node }) {
             <button
               type="button"
               className="flex-1 ml-3 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={() => setIsModify(true)}
             >
               Modify
             </button>

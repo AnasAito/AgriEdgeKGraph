@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { get } from "lodash";
 import { useQuery } from "@apollo/client";
 import Queries from "../api/queries/index";
+import Mutations from "../api/Mutations/index";
 import { useLocation } from "react-router-dom";
 import View from "./view";
 
@@ -96,6 +97,14 @@ export default function Index() {
       // search={search}
       selected={selected}
       setSearch={setSearch}
+      refQuery={Queries["node.get.many"]}
+      typesQuery={Queries["type.get.many"]}
+      NodeCreate={Mutations["node.create.one"]}
+      EdgeCreate={Mutations["edge.create.many"]}
+      tagsQuery={Queries["tag.get.many"]}
+      TagCreate={Mutations["tag.create.many"]}
+      NodeTagCreate={Mutations["node.tag.create.many"]}
+      NodeNeighbors={Queries["node.get.neighbors"]}
     />
   );
 }

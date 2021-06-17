@@ -9,6 +9,14 @@ export default function View({
   search,
   setSearch,
   selected,
+  refQuery,
+  typesQuery,
+  NodeCreate,
+  EdgeCreate,
+  tagsQuery,
+  TagCreate,
+  NodeTagCreate,
+  NodeNeighbors,
 }) {
   return (
     <div class="bg-white h-screen">
@@ -23,7 +31,17 @@ export default function View({
         </div>
         <div class=" z-20 mt-12 px-4 py-6 w-1/4 bg-white flex   ">
           {" "}
-          <SideBar node={node} />
+          <SideBar
+            node={node}
+            refQuery={refQuery}
+            typesQuery={typesQuery}
+            NodeCreate={NodeCreate}
+            EdgeCreate={EdgeCreate}
+            tagsQuery={tagsQuery}
+            TagCreate={TagCreate}
+            NodeTagCreate={NodeTagCreate}
+            NodeNeighbors={NodeNeighbors}
+          />
         </div>
       </div>
     </div>

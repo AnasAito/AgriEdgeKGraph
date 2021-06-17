@@ -42,7 +42,27 @@ export const NODE_GET_ONE = gql`
     }
   }
 `;
+export const NODE_GET_NEIGHBORS = gql`
+  query node_neighbors($id: uuid!) {
+    node_by_pk(id: $id) {
+      label
+      edges_to {
+        node_from {
+          id
+          label
+        }
+      }
+      edges_from {
+        node_to {
+          id
+          label
+        }
+      }
+    }
+  }
+`;
 export default {
   "node.get.many": NODE_GET_MANY,
   "node.get.one": NODE_GET_ONE,
+  "node.get.neighbors": NODE_GET_NEIGHBORS,
 };
