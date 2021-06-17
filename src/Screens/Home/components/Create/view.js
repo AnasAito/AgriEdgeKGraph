@@ -12,21 +12,25 @@ export default function View({
   loading,
   getAutoTags,
 }) {
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
   const onCancel = () => setCreate(false);
   const submit = () => {
     const node = {
       label: name,
       link: link,
       description: description,
-      refs: refs.map((node) => node.id),
+      refs: refs.map((node) => node.id).filter(onlyUnique),
       tags: tags
         .concat(tagsM)
         .map((tag) => tag.trim())
-        .filter((tag) => tag != ""),
+        .filter((tag) => tag != "")
+        .filter(onlyUnique),
       type: type,
     };
     onSubmit(node);
-    //console.log(node.tags);
+    //console.log(node);
   };
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
@@ -157,6 +161,9 @@ export default function View({
                   <span className=" my-1 inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
                     {node.label}
                     <button
+                      onClick={() =>
+                        setRefs((refs) => refs.filter((ref) => ref != node))
+                      }
                       type="button"
                       className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
                     >

@@ -160,13 +160,13 @@ export default function View({ feedNodes }) {
                   feedNodes.map((node) => (
                     <li key={node.id} className="py-5">
                       <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
-                        <h3 className="text-sm font-semibold text-gray-800">
+                        <h3 className="text-sm  font-semibold text-gray-800">
                           <button
                             // href={node.href}
                             onClick={() =>
                               history.push(`/explorer?query=${node.label}`)
                             }
-                            className="hover:underline focus:outline-none"
+                            className="hover:underline flex  font-semibold flex-wrap text-left focus:outline-none"
                           >
                             {/* Extend touch target to entire panel */}
                             <span
