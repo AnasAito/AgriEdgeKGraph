@@ -12,6 +12,7 @@ export default function View({
   TagCreate,
   NodeTagCreate,
   NodeNeighbors,
+  NodeUpdate,
 }) {
   const [isModify, setIsModify] = useState(false);
   console.log("from sidebar", node);
@@ -31,6 +32,7 @@ export default function View({
       ) : isModify ? (
         <div className="  w-full  flex flex-col justify-between ">
           <Modify
+            setIsModify={setIsModify}
             NodeNeighbors={NodeNeighbors}
             node={node}
             refQuery={refQuery}
@@ -40,6 +42,7 @@ export default function View({
             tagsQuery={tagsQuery}
             TagCreate={TagCreate}
             NodeTagCreate={NodeTagCreate}
+            NodeUpdate={NodeUpdate}
           />
         </div>
       ) : (

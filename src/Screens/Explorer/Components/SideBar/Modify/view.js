@@ -5,7 +5,7 @@ import Menu from "../Menu";
 import HashLoader from "react-spinners/ClipLoader";
 export default function View({
   node,
-  setCreate,
+  setIsModify,
   setSearch,
   nodesSearch,
   onSubmit,
@@ -13,13 +13,15 @@ export default function View({
   loading,
   getAutoTags,
   links,
+  loading_neighbors,
 }) {
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
-  const onCancel = () => setCreate(false);
+  const onCancel = () => setIsModify(false);
   const submit = () => {
     const node = {
+      id: id,
       label: name,
       link: link,
       description: description,
@@ -32,8 +34,9 @@ export default function View({
       type: type,
     };
     onSubmit(node);
-    //console.log(node);
+    console.log(node);
   };
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
@@ -46,6 +49,7 @@ export default function View({
   useEffect(() => {
     if (get(node, "id", false)) {
       console.log("to modify ", node);
+      setId(node.id);
       setName(node.name);
       setLink(node.link);
       //setType(node.type);
@@ -176,34 +180,38 @@ export default function View({
                 </div>
               </div>
               <div class="flex justify-center bg-gray-100 m-4 rounded-md p-4 space-x-2 flex-wrap  ">
-                {refs.map((node) => (
-                  <span className=" my-1 inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
-                    {node.label}
-                    <button
-                      onClick={() =>
-                        setRefs((refs) =>
-                          refs.filter((ref) => ref.id != node.id)
-                        )
-                      }
-                      type="button"
-                      className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
-                    >
-                      <span className="sr-only">Remove large option</span>
-                      <svg
-                        className="h-2 w-2"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 8 8"
+                {loading_neighbors ? (
+                  <HashLoader color="green" size={100} />
+                ) : (
+                  refs.map((node) => (
+                    <span className=" my-1 inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
+                      {node.label}
+                      <button
+                        onClick={() =>
+                          setRefs((refs) =>
+                            refs.filter((ref) => ref.id != node.id)
+                          )
+                        }
+                        type="button"
+                        className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeWidth="1.5"
-                          d="M1 1l6 6m0-6L1 7"
-                        />
-                      </svg>
-                    </button>
-                  </span>
-                ))}
+                        <span className="sr-only">Remove large option</span>
+                        <svg
+                          className="h-2 w-2"
+                          stroke="currentColor"
+                          fill="none"
+                          viewBox="0 0 8 8"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeWidth="1.5"
+                            d="M1 1l6 6m0-6L1 7"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  ))
+                )}
               </div>
               {nodesSearch.length != 0 ? (
                 <div className="border-b border-gray-200">
@@ -308,7 +316,7 @@ export default function View({
                 type="button"
                 className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
-                Create this Node
+                Modify this Node
               </button>
             </div>
           </div>

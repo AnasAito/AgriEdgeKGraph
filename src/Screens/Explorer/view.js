@@ -17,6 +17,7 @@ export default function View({
   TagCreate,
   NodeTagCreate,
   NodeNeighbors,
+  NodeUpdate,
 }) {
   return (
     <div class="bg-white h-screen">
@@ -41,6 +42,7 @@ export default function View({
             TagCreate={TagCreate}
             NodeTagCreate={NodeTagCreate}
             NodeNeighbors={NodeNeighbors}
+            NodeUpdate={NodeUpdate}
           />
         </div>
       </div>

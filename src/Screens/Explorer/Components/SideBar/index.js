@@ -10,6 +10,7 @@ export default function Index({
   TagCreate,
   NodeTagCreate,
   NodeNeighbors,
+  NodeUpdate,
 }) {
   console.log("side node", node);
 
@@ -24,6 +25,8 @@ export default function Index({
       TagCreate={TagCreate}
       NodeTagCreate={NodeTagCreate}
       NodeNeighbors={NodeNeighbors}
+      NodeUpdate={NodeUpdate}
+      //NodeUpdate={}
     />
   );
 }

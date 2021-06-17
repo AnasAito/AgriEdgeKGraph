@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import schema from "./getAutoTags";
 export default function Index({
   node,
-  setCreate,
+  setIsModify,
   refQuery,
   typesQuery,
   NodeCreate,
@@ -15,6 +15,7 @@ export default function Index({
   TagCreate,
   NodeTagCreate,
   NodeNeighbors,
+  NodeUpdate,
 }) {
   const get_neighbors = (data) => {
     const edge_to = get(data, "node_by_pk.edges_to", []).map(
@@ -52,7 +53,7 @@ export default function Index({
   });
   // node basic create
 
-  const [createNode, { data }] = useMutation(NodeCreate);
+  const [NodeUpdate_, { data }] = useMutation(NodeUpdate);
   // edge create
   const [createEdges, { data: edges }] = useMutation(EdgeCreate);
   // get tags
@@ -63,27 +64,32 @@ export default function Index({
   // nodeTags create
   const [createNodeTags, { data: nodeTags }] = useMutation(NodeTagCreate);
   const onSubmit = async (object) => {
-    setLoading(true);
+    //setLoading(true);
     //console.log(object);
     // todo
     // create node (name , link , description )
-    const result = await createNode({
+    const result = await NodeUpdate_({
       variables: {
-        object: {
+        pk_columns: {
+          id: object.id,
+          //score: 1,
+        },
+        _set: {
           label: object.label,
           description: object.description,
           link: object.link,
           type: object.type,
-          score: 1,
+          //score: 1,
         },
       },
     });
 
-    console.log("mutaton", result, get(result, "data.insert_node_one.id", ""));
-    const nodeId = get(result, "data.insert_node_one.id", "");
+    console.log("mutaton", result, get(result, "data.update_node_one.id", ""));
+    const nodeId = get(result, "data.update_node_one.id", "");
     // create edges
     //*edge list [{from ,to}]
-    if (nodeId != "") {
+    {
+      /*if (nodeId != "") {
       const edges = object.refs.map((ref) => {
         return { from: nodeId, to: ref, label: "edge" };
       });
@@ -135,7 +141,8 @@ export default function Index({
     }
     setLoading(false);
     // history.push("/home");
-    setCreate(false);
+  setIsModify(false);*/
+    }
   };
   console.log("types", types);
   function onlyUnique(value, index, self) {
@@ -144,13 +151,14 @@ export default function Index({
   return (
     <View
       node={node}
-      setCreate={setCreate}
+      setIsModify={setIsModify}
       setSearch={setSearch}
       nodesSearch={nodesSearch}
       types={types}
       onSubmit={onSubmit}
       loading={loading}
       getAutoTags={schema["get.auto.tags"]}
+      loading_neighbors={loading_neighbors}
       links={get_neighbors(neighbors).filter(onlyUnique)}
     />
   );

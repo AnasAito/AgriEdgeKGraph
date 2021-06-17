@@ -105,6 +105,7 @@ export default function Index() {
       TagCreate={Mutations["tag.create.many"]}
       NodeTagCreate={Mutations["node.tag.create.many"]}
       NodeNeighbors={Queries["node.get.neighbors"]}
+      NodeUpdate={Mutations["node.update.one"]}
     />
   );
 }
